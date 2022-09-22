@@ -1,0 +1,17 @@
+Description: fix detection of external caller for deprecation warnings
+ take into account Debian installation path for Ruby libraries.
+Origin: vendor
+Author: Cédric Boutillier <boutil@debian.org>
+Last-Update: 2014-05-02
+
+--- a/lib/fake_web/responder.rb
++++ b/lib/fake_web/responder.rb
+@@ -116,7 +116,7 @@
+ 
+     def print_file_string_options_deprecation_warning
+       which = options.has_key?(:file) ? :file : :string
+-      first_external_caller = caller.detect { |line| !line.include?("/lib/fake_web") }
++      first_external_caller = caller.detect { |line| !line.include?("/vendor_ruby/fake_web") }
+       $stderr.puts
+       $stderr.puts "Deprecation warning: FakeWeb's :#{which} option has been renamed to :body."
+       $stderr.puts "Just replace :#{which} with :body in your FakeWeb.register_uri calls."

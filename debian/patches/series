@@ -1,0 +1,7 @@
+no_bundler_simplecov.patch
+fix_print_file_string_options_deprecation_warning.patch
+deactivate_google_tests.patch
+skip_session_test.patch
+skip-test-requiring-net-and-failing.patch
+relax-rake.patch
+fix-ruby3.0-FTBFS.patch

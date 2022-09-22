@@ -1,0 +1,15 @@
+Description: Relax rake to fix autopkgtest
+Author: Utkarsh Gupta <guptautkarsh2102@gmail.com>
+Last-Update: 2020-04-02
+
+--- a/fakeweb.gemspec
++++ b/fakeweb.gemspec
+@@ -56,7 +56,7 @@
+     rake_spec = ["~> 10.0"]
+   else
+     # Otherwise, prefer up-to-date Rake
+-    rake_spec = ["~> 12.0"]
++    rake_spec = ["~> 13.0"]
+   end
+   s.add_development_dependency "rake", rake_spec
+ 

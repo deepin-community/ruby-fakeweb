@@ -1,0 +1,129 @@
+Description: deactivate tests using test/fixtures/google_response_*
+ those files have been deleted when repacking
+Forwarded: not-needed
+Author: Cédric Boutillier <boutil@debian.org>
+Last-Update: 2018-03-14
+
+--- a/test/test_fake_web.rb
++++ b/test/test_fake_web.rb
+@@ -328,14 +328,14 @@
+     assert_equal fake_response, response
+   end
+ 
+-  def test_mock_get_with_request_from_file_as_registered_uri
++  def _test_mock_get_with_request_from_file_as_registered_uri
+     FakeWeb.register_uri(:get, 'http://www.google.com/', :response => fixture_path("google_response_without_transfer_encoding"))
+     response = Net::HTTP.start('www.google.com') { |query| query.get('/') }
+     assert_equal '200', response.code
+     assert response.body.include?('<title>Google</title>')
+   end
+ 
+-  def test_mock_post_with_request_from_file_as_registered_uri
++  def _test_mock_post_with_request_from_file_as_registered_uri
+     FakeWeb.register_uri(:post, 'http://www.google.com/', :response => fixture_path("google_response_without_transfer_encoding"))
+     response = Net::HTTP.start('www.google.com') { |query| query.post('/', '') }
+     assert_equal "200", response.code
+@@ -519,28 +519,28 @@
+     4.times { assert_equal 'ever_more',            Net::HTTP.get(uri) }
+   end
+ 
+-  def test_mock_request_using_response_with_transfer_encoding_header_has_valid_transfer_encoding_header
++  def _test_mock_request_using_response_with_transfer_encoding_header_has_valid_transfer_encoding_header
+     FakeWeb.register_uri(:get, 'http://www.google.com/', :response => fixture_path("google_response_with_transfer_encoding"))
+     response = Net::HTTP.start('www.google.com') { |query| query.get('/') }
+     assert_not_nil response['transfer-encoding']
+     assert response['transfer-encoding'] == 'chunked'
+   end
+ 
+-  def test_mock_request_using_response_without_transfer_encoding_header_does_not_have_a_transfer_encoding_header
++  def _test_mock_request_using_response_without_transfer_encoding_header_does_not_have_a_transfer_encoding_header
+     FakeWeb.register_uri(:get, 'http://www.google.com/', :response => fixture_path("google_response_without_transfer_encoding"))
+     response = nil
+     response = Net::HTTP.start('www.google.com') { |query| query.get('/') }
+     assert !response.key?('transfer-encoding')
+   end
+ 
+-  def test_mock_request_using_response_from_curl_has_original_transfer_encoding_header
++  def _test_mock_request_using_response_from_curl_has_original_transfer_encoding_header
+     FakeWeb.register_uri(:get, 'http://www.google.com/', :response => fixture_path("google_response_from_curl"))
+     response = Net::HTTP.start('www.google.com') { |query| query.get('/') }
+     assert_not_nil response['transfer-encoding']
+     assert response['transfer-encoding'] == 'chunked'
+   end
+ 
+-  def test_txt_file_should_have_three_lines
++  def _test_txt_file_should_have_three_lines
+     FakeWeb.register_uri(:get, 'http://www.google.com/', :body => fixture_path("test_txt_file"))
+     response = Net::HTTP.start('www.google.com') { |query| query.get('/') }
+     assert response.body.split(/\n/).size == 3, "response has #{response.body.split(/\n/).size} lines should have 3"
+@@ -594,14 +594,14 @@
+     assert_equal options_before_request, options
+   end
+ 
+-  def test_registering_with_a_response_pointing_to_a_pathname
++  def _test_registering_with_a_response_pointing_to_a_pathname
+     path = Pathname.new(fixture_path("google_response_without_transfer_encoding"))
+     FakeWeb.register_uri(:get, "http://google.com", :response => path)
+     response = Net::HTTP.start("google.com") { |http| http.get("/") }
+     assert response.body.include?("<title>Google</title>")
+   end
+ 
+-  def test_registering_with_a_response_pointing_to_a_pathname_does_not_modify_options
++  def _test_registering_with_a_response_pointing_to_a_pathname_does_not_modify_options
+     path = Pathname.new(fixture_path("google_response_without_transfer_encoding"))
+     options = {:response => path}
+     options_before_request = options.dup
+--- a/test/test_missing_pathname.rb
++++ b/test/test_missing_pathname.rb
+@@ -22,7 +22,7 @@
+     Net::HTTP.start("example.com") { |http| http.get("/") }
+   end
+ 
+-  def test_register_using_response_without_pathname
++  def _test_register_using_response_without_pathname
+     FakeWeb.register_uri(:get, "http://example.com/", :response => fixture_path("google_response_without_transfer_encoding"))
+     Net::HTTP.start("example.com") { |http| http.get("/") }
+   end
+--- a/test/test_registering_with_io.rb
++++ b/test/test_registering_with_io.rb
+@@ -2,35 +2,35 @@
+ 
+ class TestRegisteringWithIO < Test::Unit::TestCase
+ 
+-  def test_registering_a_file_handle_without_transfer_encoding
++  def _test_registering_a_file_handle_without_transfer_encoding
+     file = File.new(fixture_path("google_response_without_transfer_encoding"))
+     FakeWeb.register_uri(:get, "http://google.com", :response => file)
+     response = Net::HTTP.start("google.com") { |query| query.get('/') }
+     assert response.body.include?("<title>Google</title>")
+   end
+ 
+-  def test_registering_a_file_handle_with_transfer_encoding
++  def _test_registering_a_file_handle_with_transfer_encoding
+     file = File.new(fixture_path("google_response_with_transfer_encoding"))
+     FakeWeb.register_uri(:get, "http://google.com", :response => file)
+     response = Net::HTTP.start("google.com") { |query| query.get('/') }
+     assert response.body.include?("<title>Google</title>")
+   end
+ 
+-  def test_registering_a_file_handle_from_curl
++  def _test_registering_a_file_handle_from_curl
+     file = File.new(fixture_path("google_response_from_curl"))
+     FakeWeb.register_uri(:get, "http://google.com", :response => file)
+     response = Net::HTTP.start("google.com") { |query| query.get('/') }
+     assert response.body.include?("<title>Google</title>")
+   end
+ 
+-  def test_registering_a_stringio
++  def _test_registering_a_stringio
+     stringio = StringIO.new(File.read(fixture_path("google_response_from_curl")))
+     FakeWeb.register_uri(:get, "http://google.com", :response => stringio)
+     response = Net::HTTP.start("google.com") { |query| query.get('/') }
+     assert response.body.include?("<title>Google</title>")
+   end
+ 
+-  def test_creating_net_buffered_io_directly_with_an_unsupported_underlying_object
++  def _test_creating_net_buffered_io_directly_with_an_unsupported_underlying_object
+     # It's not possible to exercise this code path through an end-user API because
+     # FakeWeb::Responder performs an equivalent check on the object before passing
+     # it on to Net::BufferedIO. So this is just an internal sanity check.

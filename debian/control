@@ -1,0 +1,29 @@
+Source: ruby-fakeweb
+Maintainer: Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Minto Joseph <mintojoseph@yahoo.com>,
+           Cédric Boutillier <boutil@debian.org>
+Section: ruby
+Testsuite: autopkgtest-pkg-ruby
+Priority: optional
+Build-Depends: debhelper-compat (= 13),
+               gem2deb,
+               ruby-http-connection,
+               ruby-mocha,
+               ruby-samuel
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/ruby-team/ruby-fakeweb
+Vcs-Git: https://salsa.debian.org/ruby-team/ruby-fakeweb.git
+Homepage: https://github.com/chrisk/fakeweb
+XS-Ruby-Versions: all
+Rules-Requires-Root: no
+
+Package: ruby-fakeweb
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Multi-Arch: foreign
+Description: tool for faking responses to HTTP requests
+ FakeWeb is a helper for faking web requests in Ruby.
+ It works at a global level, without modifying code or
+ writing extensive stubs.

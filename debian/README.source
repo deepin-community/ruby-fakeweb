@@ -1,0 +1,11 @@
+This package uses the Debian 3.0 (quilt) source package format.
+
+The upstream tarball has been repacked to remove the bundled libraries 
+right_http_connection and samuel from test/vendor/, as well as
+test/fixtures/google_response_* containing minified javascript code from Google
+homepage.
+
+The repacking is achieved with the debian/repack.sh script.
+
+Minto Joseph <mintojoseph@yahoo.com>
+Last Update: 2013-10-04

@@ -1,0 +1,126 @@
+ruby-fakeweb (1.3.0+git20170806+dfsg1-3) unstable; urgency=medium
+
+  * Team Upload.
+  [ Cédric Boutillier ]
+  * [ci skip] Update team name
+  * [ci skip] Add .gitattributes to keep unwanted files out of
+    the source package
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints. + ruby-fakeweb: Add Multi-Arch: foreign.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Jenkins ]
+  * Bump debhelper from old 12 to 13.
+  * Update standards version to 4.5.1, no changes needed.
+
+  [ Nilesh Patra ]
+  * Add patch to fix ruby3.0 FTBFS (Closes: #996226)
+
+ -- Nilesh Patra <nilesh@debian.org>  Sat, 23 Oct 2021 01:05:04 +0530
+
+ruby-fakeweb (1.3.0+git20170806+dfsg1-2) unstable; urgency=medium
+
+  * Team upload
+  * Add patch to skip tests requiring net and failing (Closes: #952042)
+  * Add patch to fix autopkgtest
+  * Fix package wrt cme
+  * Add Rules-Requires-Root: no
+  * Drop runtime dependency on ruby interpreter
+  * Add salsa-ci.yml
+
+ -- Utkarsh Gupta <utkarsh@debian.org>  Thu, 02 Apr 2020 17:23:50 +0530
+
+ruby-fakeweb (1.3.0+git20170806+dfsg1-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add patch skip_session_test to fix FTBFS (Closes: #926381)
+
+ -- Ivo De Decker <ivodd@debian.org>  Mon, 15 Apr 2019 13:35:49 +0000
+
+ruby-fakeweb (1.3.0+git20170806+dfsg1-1) unstable; urgency=medium
+
+  * New upstream version 1.3.0+git20170806+dfsg1
+    + Fix compatibility with Ruby 2.5 (Closes: #888124)
+    + Drop patches for minitest5, ruby2.2, ruby2.3 not needed anymore
+  * Bump debhelper compatibility to 11
+  * Bump Standards-Version to 4.1.3 (no changes needed)
+  * Use https in watch file and copyright format URL
+  * Point VCS-* fields to salsa
+
+ -- Cédric Boutillier <boutil@debian.org>  Wed, 14 Mar 2018 14:29:22 +0100
+
+ruby-fakeweb (1.3.0+git20131202.48208f9+dfsg-3) unstable; urgency=medium
+
+  * Team upload.
+  * Follow ruby 2.3 behaviour changes, fixes FTBFS.
+  * Update packaging using dh-make-ruby -w.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Thu, 03 Mar 2016 21:43:21 +0100
+
+ruby-fakeweb (1.3.0+git20131202.48208f9+dfsg-2) unstable; urgency=medium
+
+  * Team upload.
+  * added minitest5/ruby 22 patches from Upstream (Closes: #795034)
+  * refreshed deactivate_google_tests.patch
+  * refreshed no_bundler_simplecov.patch
+  * refreshed deactiveate_googe_tests
+  * bumped compat level to 9
+  * bumped standards version to 3.9.6 (no changes)
+  * d/control:
+    - changed homepage to https
+    - wrap-sort
+    - added Testsuite header
+
+ -- Jonas Genannt <genannt@debian.org>  Wed, 19 Aug 2015 18:24:05 +0200
+
+ruby-fakeweb (1.3.0+git20131202.48208f9+dfsg-1) unstable; urgency=medium
+
+  * Imported Upstream version 1.3.0+git20131202.48208f9+dfsg
+    - upstream snapshot from Github.
+    - contains fixes for Ruby 2.1 (Closes: #746055)
+  * Fix number of bug closed (#741760 instead of #741815) in the previous
+    changelog entry and the DEP-3 header of require_mocha_setup.patch.
+  * debian/patches:
+    - drop fix_tests_ruby2.0.patch and require_mocha_setup.patch, integrated
+      upstream
+    - add fix_print_file_string_options_deprecation_warning.patch, fixing
+      caller in deprecation warnings
+    - add no_bundler_simplecov.patch to drop use of bundler or simplecov in
+      tests
+  * restrict filter in debian/ruby-tests.rb to test_*.rb files
+
+ -- Cédric Boutillier <boutil@debian.org>  Fri, 02 May 2014 16:20:55 +0200
+
+ruby-fakeweb (1.3.0+dfsg1-3) unstable; urgency=medium
+
+  * Add require_mocha_setup.patch:
+    require mocha/setup instead of mocha, since it is the way to
+    ensure that Mocha is correctly initialized.
+    This fixes the test failures caused by missing methods (Closes: #741760)
+
+ -- Cédric Boutillier <boutil@debian.org>  Sun, 16 Mar 2014 23:26:47 +0100
+
+ruby-fakeweb (1.3.0+dfsg1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Depend on "better" version of duplicate http-connection gem
+  * Bump Standards-Version to 3.9.5 (no changes)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Mon, 23 Dec 2013 19:14:47 +0100
+
+ruby-fakeweb (1.3.0+dfsg1-1) unstable; urgency=low
+
+  * repack again the tarball
+    + really remove test/fixtures/google_response_*
+  * add deactivate_google_tests.patch: deactivate all patches using those
+    removed files.
+
+ -- Cédric Boutillier <boutil@debian.org>  Fri, 04 Oct 2013 18:08:44 +0200
+
+ruby-fakeweb (1.3.0+dfsg-1) unstable; urgency=low
+
+  * Initial release (Closes: #710786)
+
+ -- Cédric Boutillier <boutil@debian.org>  Fri, 04 Oct 2013 17:13:27 +0200

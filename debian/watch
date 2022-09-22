@@ -1,0 +1,3 @@
+version=3
+opts=dversionmangle=s/\+dfsg(\d)*// \
+https://pkg-ruby-extras.alioth.debian.org/cgi-bin/gemwatch/fakeweb .*/fakeweb-(.*).tar.gz debian sh debian/repack.sh
